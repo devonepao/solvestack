@@ -1,0 +1,5 @@
+{
+  "name": "SolveStack",
+  "description": "A focus-centric, stack-based task manager with integrated timers and AI-assisted task breakdown. Designed for single-tasking flow.",
+  "requestFramePermissions": []
+}
