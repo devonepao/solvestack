@@ -6,11 +6,10 @@
 
 # 🎯 SolveStack
 
-**A modern, AI-powered task management app that helps you focus on what matters**
+**A modern task management app that helps you focus on what matters**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Made with React](https://img.shields.io/badge/Made%20with-React-61DAFB?logo=react)](https://react.dev/)
-[![Powered by Gemini](https://img.shields.io/badge/Powered%20by-Gemini%20AI-4285F4?logo=google)](https://ai.google.dev/)
 
 [Features](#-features) • [Demo](#-demo) • [Installation](#-installation) • [Usage](#-usage) • [Contributing](#-contributing) • [License](#-license)
 
@@ -20,13 +19,12 @@
 
 ## 📖 About
 
-SolveStack is a productivity application that combines task management with a Pomodoro-style timer. It uses a **stack-based approach** where you focus on the top task, complete it, and move to the next. The AI-powered task breakdown feature helps you decompose large goals into actionable steps.
+SolveStack is a productivity application that combines task management with a Pomodoro-style timer. It uses a **stack-based approach** where you focus on the top task, complete it, and move to the next.
 
 ### ✨ Features
 
 - 🎯 **Focus-First Design**: Work on one task at a time with a distraction-free interface
 - ⏱️ **Built-in Timer**: Pomodoro-style timer for each task to maintain focus
-- 🤖 **AI Task Breakdown**: Let Gemini AI break down complex goals into manageable tasks
 - 📝 **Drag & Drop**: Easily reorder tasks by dragging them
 - 💾 **Auto-Save**: Your tasks are automatically saved in browser storage
 - 📱 **Responsive**: Works beautifully on desktop, tablet, and mobile devices
@@ -34,7 +32,7 @@ SolveStack is a productivity application that combines task management with a Po
 
 ## 🎬 Demo
 
-View the live app in AI Studio: [https://ai.studio/apps/drive/1hwNOLsUSPk1OEbIC5pe0nUdrh_jxpNsw](https://ai.studio/apps/drive/1hwNOLsUSPk1OEbIC5pe0nUdrh_jxpNsw)
+Try the app live: [SolveStack Demo](https://devonepao.github.io/solvestack/)
 
 ## 🚀 Installation
 
@@ -42,7 +40,6 @@ View the live app in AI Studio: [https://ai.studio/apps/drive/1hwNOLsUSPk1OEbIC5
 
 - [Node.js](https://nodejs.org/) (version 18 or higher)
 - [npm](https://www.npmjs.com/) (comes with Node.js)
-- A [Gemini API key](https://aistudio.google.com/app/apikey) (free to get)
 
 ### Setup
 
@@ -59,29 +56,13 @@ View the live app in AI Studio: [https://ai.studio/apps/drive/1hwNOLsUSPk1OEbIC5
    npm install
    ```
 
-3. **Configure your API key:**
-
-   Create a `.env.local` file in the root directory:
-
-   ```bash
-   cp .env.local.example .env.local
-   ```
-
-   Edit `.env.local` and add your Gemini API key:
-
-   ```env
-   GEMINI_API_KEY=your_actual_api_key_here
-   ```
-
-   > 💡 Get your free API key at [Google AI Studio](https://aistudio.google.com/app/apikey)
-
-4. **Run the development server:**
+3. **Run the development server:**
 
    ```bash
    npm run dev
    ```
 
-5. **Open your browser:**
+4. **Open your browser:**
 
    Navigate to [http://localhost:3000](http://localhost:3000) to see the app running!
 
@@ -101,18 +82,11 @@ npm run preview
 
 ## 🎮 Usage
 
-### Adding Tasks Manually
+### Adding Tasks
 
 1. Enter a task title in the input field
 2. Set the duration (in minutes) for the task
 3. Click the **+** button to add it to your stack
-
-### Using AI Task Breakdown
-
-1. Click **"Ask AI to build a stack"**
-2. Describe your goal (e.g., "Learn the basics of Python in 2 hours")
-3. Click **"Generate Stack"**
-4. The AI will break down your goal into smaller, time-estimated tasks
 
 ### Managing Your Stack
 
@@ -131,7 +105,6 @@ npm run preview
 - **Language**: [TypeScript](https://www.typescriptlang.org/)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/) (via CDN)
 - **Icons**: [Lucide React](https://lucide.dev/)
-- **AI**: [Google Gemini AI](https://ai.google.dev/)
 - **Storage**: Browser LocalStorage
 
 ## 📁 Project Structure
@@ -139,12 +112,10 @@ npm run preview
 ```
 solvestack/
 ├── components/          # React components
-│   ├── AICreator.tsx   # AI task generation component
 │   ├── Footer.tsx      # Footer component
 │   ├── StackLayer.tsx  # Individual task card
 │   └── TimerDisplay.tsx # Timer UI component
 ├── services/           # Service layer
-│   ├── geminiService.ts # Gemini AI integration
 │   └── storage.ts      # LocalStorage utilities
 ├── App.tsx            # Main application component
 ├── index.tsx          # Application entry point
@@ -182,7 +153,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🙏 Acknowledgments
 
 - Built with [React](https://react.dev/) and [Vite](https://vite.dev/)
-- AI powered by [Google Gemini](https://ai.google.dev/)
 - Icons from [Lucide](https://lucide.dev/)
 - UI styling with [Tailwind CSS](https://tailwindcss.com/)
 
