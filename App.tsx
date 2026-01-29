@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Plus, Layers, CheckSquare, Clock } from 'lucide-react';
-import { Task, TaskStatus, AIResponseItem } from './types';
+import { Task, TaskStatus } from './types';
 import { loadTasks, saveTasks } from './services/storage';
 import Footer from './components/Footer';
 import TimerDisplay from './components/TimerDisplay';
 import StackLayer from './components/StackLayer';
-import AICreator from './components/AICreator';
 
 // Simple ID generator
 const generateId = () => Math.random().toString(36).substr(2, 9);
@@ -78,18 +77,6 @@ const App: React.FC = () => {
     // Add to END of stack for typical todo list behavior
     setTasks(prev => [...prev, newTask]);
     setNewTaskTitle('');
-  };
-
-  const handleAIAddTasks = (items: AIResponseItem[]) => {
-    const newTasks: Task[] = items.map(item => ({
-      id: generateId(),
-      title: item.task,
-      totalDuration: item.estimatedMinutes * 60,
-      remainingDuration: item.estimatedMinutes * 60,
-      status: TaskStatus.PENDING,
-      createdAt: Date.now(),
-    }));
-    setTasks(prev => [...prev, ...newTasks]);
   };
 
   const handleDeleteTask = (id: string) => {
@@ -247,8 +234,6 @@ const App: React.FC = () => {
             
             {/* Input Area */}
             <div className="mb-8">
-               <AICreator onAddTasks={handleAIAddTasks} />
-
                <form onSubmit={handleAddTask} className="flex gap-3 items-stretch shadow-sm rounded-xl overflow-hidden ring-1 ring-slate-200 bg-white p-1">
                  <input
                     type="text"
