@@ -14,8 +14,3 @@ export interface Task {
   status: TaskStatus;
   createdAt: number;
 }
-
-export interface AIResponseItem {
-  task: string;
-  estimatedMinutes: number;
-}
