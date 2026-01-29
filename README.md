@@ -70,7 +70,7 @@ View the live app in AI Studio: [https://ai.studio/apps/drive/1hwNOLsUSPk1OEbIC5
    Edit `.env.local` and add your Gemini API key:
 
    ```env
-   VITE_GEMINI_API_KEY=your_actual_api_key_here
+   GEMINI_API_KEY=your_actual_api_key_here
    ```
 
    > 💡 Get your free API key at [Google AI Studio](https://aistudio.google.com/app/apikey)
@@ -83,7 +83,7 @@ View the live app in AI Studio: [https://ai.studio/apps/drive/1hwNOLsUSPk1OEbIC5
 
 5. **Open your browser:**
 
-   Navigate to [http://localhost:5173](http://localhost:5173) to see the app running!
+   Navigate to [http://localhost:3000](http://localhost:3000) to see the app running!
 
 ## 📦 Build for Production
 
