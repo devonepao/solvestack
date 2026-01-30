@@ -1,0 +1,113 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build project
+        run: npm run build
+      
+      - name: Add .nojekyll file
+        run: touch dist/.nojekyll
+      
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: dist/
+          retention-days: 1
+
+  test-build:
+    needs: build
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts
+          path: dist/
+      
+      - name: Verify build output
+        run: |
+          echo "Checking build output..."
+          ls -la dist/
+          
+          if [ ! -f "dist/index.html" ]; then
+            echo "Error: index.html not found in dist/"
+            exit 1
+          fi
+          
+          if [ ! -f "dist/.nojekyll" ]; then
+            echo "Error: .nojekyll not found in dist/"
+            exit 1
+          fi
+          
+          if [ ! -d "dist/assets" ]; then
+            echo "Error: assets directory not found in dist/"
+            exit 1
+          fi
+          
+          echo "Build verification successful!"
+          echo "Build contains:"
+          find dist/ -type f -exec echo "  {}" \;
+      
+      - name: Test build content
+        run: |
+          echo "Verifying build paths..."
+          if ! grep -q "/solvestack/" dist/index.html; then
+            echo "Error: base path '/solvestack/' not found in index.html"
+            echo "Content of index.html:"
+            cat dist/index.html
+            exit 1
+          fi
+          echo "Base path verification successful!"
+
+  deploy:
+    needs: test-build
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts
+          path: dist/
+      
+      - name: Deploy to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: gh-pages
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          commit_message: 'Deploy to GitHub Pages'

@@ -74,6 +74,15 @@ The build output will be in the `dist/` directory. You can preview the productio
 npm run preview
 ```
 
+### Automated Deployment
+
+This project uses GitHub Actions to automatically build and deploy to GitHub Pages:
+
+- **Trigger**: Automatically runs on push to `main` branch
+- **Process**: Builds the project, validates the output, and deploys to `gh-pages` branch
+- **Testing**: Run `./test-build.sh` to test the build process locally
+- **Documentation**: See [.github/README.md](.github/README.md) for detailed workflow documentation
+
 ## 🎮 Usage
 
 ### Adding Tasks
