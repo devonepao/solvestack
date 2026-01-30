@@ -44,6 +44,7 @@ jobs:
           name: build-artifacts
           path: dist/
           retention-days: 1
+          include-hidden-files: true
 
   test-build:
     needs: build
@@ -55,6 +56,9 @@ jobs:
         with:
           name: build-artifacts
           path: dist/
+      
+      - name: Add .nojekyll file
+        run: touch dist/.nojekyll
       
       - name: Verify build output
         run: |
@@ -101,6 +105,9 @@ jobs:
         with:
           name: build-artifacts
           path: dist/
+      
+      - name: Add .nojekyll file
+        run: touch dist/.nojekyll
       
       - name: Deploy to gh-pages branch
         uses: peaceiris/actions-gh-pages@v3

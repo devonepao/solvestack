@@ -39,7 +39,12 @@ echo "✓ .nojekyll file added"
 
 echo ""
 echo "Step: Upload build artifacts (simulated)"
-echo "✓ Artifacts would be uploaded"
+# Simulate artifact upload/download by creating a temp directory
+rm -rf /tmp/artifacts
+mkdir -p /tmp/artifacts
+cp -r dist/* /tmp/artifacts/ 2>/dev/null || true
+# Note: Hidden files (.nojekyll) might not be copied by cp -r dist/*
+echo "✓ Artifacts uploaded (visible files only)"
 
 # Job 2: Test Build
 echo ""
@@ -47,7 +52,16 @@ echo "==== JOB 2: TEST BUILD ===="
 echo ""
 
 echo "Step: Download build artifacts (simulated)"
-echo "✓ Using local dist/ directory"
+# Simulate artifact download - create fresh dist from artifacts
+rm -rf dist/
+mkdir -p dist/
+cp -r /tmp/artifacts/* dist/ 2>/dev/null || true
+echo "✓ Artifacts downloaded (hidden files may be missing)"
+
+echo ""
+echo "Step: Add .nojekyll file"
+touch dist/.nojekyll
+echo "✓ .nojekyll file added"
 
 echo ""
 echo "Step: Verify build output"
@@ -87,7 +101,16 @@ echo "==== JOB 3: DEPLOY ===="
 echo ""
 
 echo "Step: Download build artifacts (simulated)"
-echo "✓ Using local dist/ directory"
+# Simulate artifact download again - create fresh dist from artifacts
+rm -rf dist/
+mkdir -p dist/
+cp -r /tmp/artifacts/* dist/ 2>/dev/null || true
+echo "✓ Artifacts downloaded (hidden files may be missing)"
+
+echo ""
+echo "Step: Add .nojekyll file"
+touch dist/.nojekyll
+echo "✓ .nojekyll file added"
 
 echo ""
 echo "Step: Deploy to gh-pages branch (simulated)"
