@@ -40,6 +40,7 @@ echo "✓ .nojekyll file added"
 echo ""
 echo "Step: Upload build artifacts (simulated)"
 # Simulate artifact upload/download by creating a temp directory
+rm -rf /tmp/artifacts
 mkdir -p /tmp/artifacts
 cp -r dist/* /tmp/artifacts/ 2>/dev/null || true
 # Note: Hidden files (.nojekyll) might not be copied by cp -r dist/*
