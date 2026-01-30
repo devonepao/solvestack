@@ -37,20 +37,27 @@ const App: React.FC = () => {
 
   // Timer Ticking Logic
   useEffect(() => {
-    let interval: any;
+    let interval: ReturnType<typeof setInterval>;
 
     if (isTimerActive && tasks.length > 0) {
       interval = setInterval(() => {
         setTasks(prevTasks => {
+          // Create shallow copy of the array
           const newTasks = [...prevTasks];
-          const activeTask = newTasks[0]; // Top of stack
-
-          if (activeTask && activeTask.remainingDuration > 0) {
-            activeTask.remainingDuration -= 1;
+          
+          if (newTasks.length > 0) {
+            // Create shallow copy of the active task to avoid mutation
+            const activeTask = { ...newTasks[0] }; 
             
-            if (activeTask.remainingDuration === 0) {
-              setIsTimerActive(false);
-              if (audioRef.current) audioRef.current.play().catch(e => console.log('Audio play failed', e));
+            if (activeTask.remainingDuration > 0) {
+              activeTask.remainingDuration -= 1;
+              // Update the array with the new task object
+              newTasks[0] = activeTask;
+              
+              if (activeTask.remainingDuration === 0) {
+                setIsTimerActive(false);
+                if (audioRef.current) audioRef.current.play().catch(e => console.log('Audio play failed', e));
+              }
             }
           }
           return newTasks;
@@ -102,7 +109,13 @@ const App: React.FC = () => {
     if (tasks.length === 0) return;
     setTasks(prev => {
       const copy = [...prev];
-      copy[0].remainingDuration = copy[0].totalDuration;
+      // Create a shallow copy of the task we're modifying
+      if (copy.length > 0) {
+        copy[0] = { 
+          ...copy[0], 
+          remainingDuration: copy[0].totalDuration 
+        };
+      }
       return copy;
     });
     setIsTimerActive(false);

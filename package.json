@@ -2,6 +2,7 @@
   "name": "solvestack",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://devonepao.github.io/solvestack",
   "type": "module",
   "scripts": {
     "dev": "vite",
